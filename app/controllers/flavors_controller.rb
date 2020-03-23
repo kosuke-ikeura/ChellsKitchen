@@ -25,7 +25,7 @@ class FlavorsController < ApplicationController
             @users = User.all
             user_ids = @users.map(&:id)
             flavor_ids = @flavors_1.map(&:id)
-            SeasoningMailer.send_status_1(user_ids, flavor_ids).deliver_later
+            FlavorMailer.send_status_1(user_ids, flavor_ids).deliver_later
         end
         @flavors = Flavor.all.order(id: "ASC").page(params[:page]).per(10)
         redirect_to flavors_path
