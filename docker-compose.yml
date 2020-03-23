@@ -1,0 +1,28 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+    env_file:
+      - ./environments/db.env
+    command: bundle exec puma -C config/puma.rb
+    volumes:
+      - .:/chells-kitchen
+    depends_on:
+      - db
+  db:
+    build: ./environments
+    image: mysql:5.7
+    env_file:
+      - ./environments/db.env
+    volumes:
+      - ./tmp/db:/var/lib/mysql
+  web:
+    build:
+      context: containers/nginx
+    volumes:
+      - .:/chells-kitchen
+    ports:
+      - 80:80
+    depends_on:
+      - app

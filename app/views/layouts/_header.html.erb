@@ -1,0 +1,28 @@
+<header>
+    <nav class="header-flex">
+        <%= link_to "Chells Kitchen", flavors_path,  class: "header-logo"%>
+        <ul id="header-items">
+            <% if user_signed_in? %>
+            <li>
+                <%= link_to "購入", new_flavor_path %>
+            </li>
+            <li>
+                <%= link_to "マイページ", user_path(current_user) %>
+            </li>
+            <li>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+            </li>
+            <% else %>
+            <li>
+                <%= link_to "サインアップ", new_user_registration_path %>
+            </li>
+            <li>
+                <%= link_to "ログイン", new_user_session_path %>
+            </li>
+            <% end %>
+        </ul>
+        <div class="dropdown">
+            <%= image_tag "dropdown_menu.png" %>
+        </div>
+    </nav>
+</header>
