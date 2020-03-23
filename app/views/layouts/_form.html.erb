@@ -1,0 +1,21 @@
+<div class="modal__bg js-modal-close">
+   <div class="modal__content">
+      <%= form_with(model: @flavor, local: true) do |form| %>
+      <div class="modal-header">
+        <h5 class="modal-title">ステータスを変更</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+      <div class="modal-body">
+            <div class="form-group field">
+               <%= form.select :status, [1,2,3]%>
+            </div>
+      </div>
+         <div class="modal-footer actions">
+            <%= form.submit class: "btn btn-danger" %>
+            <%= link_to "購入", new_flavor_path, class:"btn btn-primary" %>
+         </div>
+         <% end %>
+   </div>
+</div>

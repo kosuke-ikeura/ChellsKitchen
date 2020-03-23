@@ -10,10 +10,8 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
  *= require_self
  */
-
 
  body {
      margin: 0;
@@ -490,3 +488,45 @@ span.translation_missing {
 
 
 /* end /flavors css */
+
+// start modal form
+#flavor-modal {
+    display: none;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.modal__bg {
+    background: rgba(0,0,0,0.8);
+    height: 100vh;
+    position: absolute;
+    width: 100%;
+}
+.modal__content {
+    background:  rgba(228, 218, 171, 0.9);
+    left: 50%;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+}
+.modal-title {
+    font-size: 20px;
+    margin: 0;
+    color: #cc2931;
+}
+.modal-header {
+    position: relative;
+}
+.modal-header button {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.form-group img {
+    width: 70px;
+    height: 70px;
+}
+// end modal form
