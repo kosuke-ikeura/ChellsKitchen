@@ -12,6 +12,12 @@
             <li>
                 <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
             </li>
+            <li>
+                <%= form_tag(search_flavors_path, :method => 'get') do %>
+                    <%= text_field_tag :search %>
+                    <%= submit_tag 'Search', :name => nil %>
+                <% end %>
+            </li>
             <% else %>
             <li>
                 <%= link_to "サインアップ", new_user_registration_path %>

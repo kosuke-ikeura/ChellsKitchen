@@ -5,5 +5,4 @@ class UsersController < ApplicationController
   def image
     @flavors = current_user.flavors
   end
-
 end

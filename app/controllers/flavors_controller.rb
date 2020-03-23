@@ -30,6 +30,10 @@ class FlavorsController < ApplicationController
         @flavors = Flavor.all.order(id: "ASC").page(params[:page]).per(10)
         redirect_to flavors_path
     end
+    def search
+      @flavors = Flavor.search(params[:search])
+      @StatusImage = ["", "urn_red.png", "urn_yellow.png", "urn_blue.png"]
+    end
     
     private
     def flavor_params
