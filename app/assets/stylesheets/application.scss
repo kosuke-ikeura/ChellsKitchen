@@ -759,4 +759,49 @@ span.translation_missing {
     width: 70px;
     height: 70px;
 }
+.modal_explanation {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+button.close {
+    background-color: rgba(228, 218, 171, 0.1);
+    position: absolute;
+    top: 0px;
+    right: 30px;
+}
+.urn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+select#flavor_status {
+    display: block;
+    margin: 0 auto;
+    text-indent: 44%;
+    height: 30px;
+    width: 60px;
+    background-color: #f2f2f2;
+    margin-top: 15px;
+}
+input.update-button {
+    background-color: #cc2931;
+    color: #ffffff;
+    padding: 4px 16px;
+    border-radius: 4px;
+    
+}
+a.purchase-button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #313186;
+    color: #ffffff;
+    padding: 4px 16px;
+    margin-left: 20px;
+}
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
 // end modal form
