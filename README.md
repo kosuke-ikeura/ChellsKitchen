@@ -36,7 +36,8 @@ JavaScript \
 jQuery
 
 ### 開発環境
-Docker \
+Docker
+docker-compose
 
 ### コンテナ構成
 1. Rails(App) 
