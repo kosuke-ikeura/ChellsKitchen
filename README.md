@@ -13,7 +13,7 @@ Chell's Kitchenを使うと具体的に以下のことができるようにな�
 \
 <img width="1278" alt="スクリーンショット 2020-04-18 22 53 01" src="https://user-images.githubusercontent.com/45197982/79640284-b26c2f00-81cb-11ea-9b19-cdfed04294cc.png"> \
 \
-・調味料のステータスを'不足(赤色)'にすると、シェアハウス全員にメールで通知が入ります。 \
+・調味料のステータスを'1(赤色)'にすると、シェアハウス全員にメールで通知が入ります。 \
 \
 <img width="1276" alt="スクリーンショット 2020-04-18 22 53 15" src="https://user-images.githubusercontent.com/45197982/79640285-b435f280-81cb-11ea-983a-045c64e70b33.png">
 
