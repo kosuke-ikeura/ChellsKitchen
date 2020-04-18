@@ -3,8 +3,7 @@
 
 Overview
 Chell's Kitchenは開発者が住んでいるチェルシーハウス国分寺発の調味料調整サービスです。
-![Uploading スクリーンショット 2020-04-18 22.51.16.png…]()
-
+<img width="1277" alt="スクリーンショット 2020-04-18 22 51 16" src="https://user-images.githubusercontent.com/45197982/79640279-ac764e00-81cb-11ea-9d8b-379375e6d46c.png">
 ## Description
 Chell's Kitchenを使うと具体的に以下のことができるようになります。
 ・どこでも調味料の状態がわかる。
