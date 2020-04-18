@@ -16,7 +16,7 @@ Chell's Kitchenを使うと具体的に以下のことができるようにな�
 ・調味料のステータスを'不足(赤色)'にすると、シェアハウス全員にメールで通知が入ります。 \
 \
 <img width="1276" alt="スクリーンショット 2020-04-18 22 53 15" src="https://user-images.githubusercontent.com/45197982/79640285-b435f280-81cb-11ea-983a-045c64e70b33.png">
-\
+
 
 ・レシートの画像を投稿することで、管理者にレシートを送る手間が省けます。
 
@@ -29,7 +29,7 @@ Chell's Kitchenを使うと具体的に以下のことができるようにな�
 
 ### バックエンド
 Ruby 2.5.1 \
-Ruby on Rails 5 \
+Ruby on Rails 5 
 
 ### フロントエンド
 JavaScript \
@@ -39,9 +39,9 @@ jQuery
 Docker \
 
 ### コンテナ構成
-1. Rails(App) \
-2. Nginx(Web) \
-3. MySQL(DB) \
+1. Rails(App) 
+2. Nginx(Web) 
+3. MySQL(DB) 
 
 ## その他
 ### URL
