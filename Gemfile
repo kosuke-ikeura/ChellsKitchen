@@ -76,3 +76,4 @@ gem 'kaminari'
 gem 'mini_magick'
 gem 'mini_racer'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'rspec_junit_formatter'
