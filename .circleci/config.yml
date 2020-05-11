@@ -1,46 +1,52 @@
-version: 2.1
+version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.5.1-node-browsers
+      - image:  circleci/ruby:2.5.1-node-browsers-legacy
         environment:
-         - BUNDLER_VERSION: '1.16.6'
-         - RAILS_ENV: 'development'
+          RAILS_ENV: test
       - image: circleci/mysql:5.7
         environment:
-         - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
-         - MYSQL_DATABASE: chells-kitchen_development
-
-     working_directory: ~/repo
-
-     steps:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: chells-kitchen_test
+    working_directory: ~/repo
+    steps:
       - checkout
-      - restore_cache
-          name: bundle installの結果をリストア
+      - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock"}}
-            - v1-dependencies-
-      - run:
-          name: bundle install
-          command: bundle install --path vendor/bundle
-      - run:
-          name: context設定の環境変数
-          command: |
-            echo "#{CHELLS-KITCHEN_DB_HOST}"
-            echo "#{CHELLS-KITCHEN_DB_USER}"
-            echo "#{CHELLS-KITCHEN_DB_PASSWORD}"
-      - save_cache:
-          name: bundle installの結果をキャッシュ
-          paths: ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          - v1-dependencies-
+
       - run:
           name: install dependencies
-          commant: yarn
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+            key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
       - run:
-          name: データベースの起動を待機
-          command: dockerize -wait tcp://192.168.33.11:3306 -timeout 1m
+          name: Wait for DB
+          command: dockerize -wait tcp:192.168.33.11:3306 -timeout 120s
+
       - run:
-          name: Rspec実行
-          command: bundle exec rspec
+          name: run tests
+          command: |
+           mkdir /tmp/test-results
+           TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+           bundle exec rspec --format progress \
+                           --format RspecJunitFormatter \
+                           --out /tmp/test-results/rspec.xml \
+                           $TEST_FILES 
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+
       - run:
-          name: Rubocop実行
+          name: run rubocop
+          command: bundle exec rubocop
+      - run:
+          name: run rspec

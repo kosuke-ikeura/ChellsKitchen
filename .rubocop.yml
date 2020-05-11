@@ -18,3 +18,6 @@ Style/MixinUsage:
 
 Layout/LineLength:
   Max: 154
+
+Style/AsciiComments:
+  Enabled: false
