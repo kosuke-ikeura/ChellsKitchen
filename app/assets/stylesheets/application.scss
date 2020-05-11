@@ -549,6 +549,12 @@
     .form-table tbody tr:nth-child(n + 2) {
         border-top: 3px dotted #e4daab;
     }
+    .submit-wrapper {
+        display: flex;
+        padding: 0 60px;
+        width: 75%;
+        justify-content: flex-end;
+    }
     .action-wrapper {
         height: 92px;
         margin-bottom: 50px;
@@ -567,11 +573,26 @@
         margin-top: 40px;
         margin-left: auto;
     }
+    div.easy-login input.action {
+        display: block;
+        width: 120px;
+        height: 50px;
+        background: #cc2931;
+        color: #f5f5ff;
+        border-radius: 3px;
+        font-size: 12px;
+        text-align: center;
+        cursor: pointer;
+        margin-left: 20px;
+    }
 }
 @media screen and (min-width: 561px){
     .form-wrapper {
         background-color: rgba(228, 218, 171, 0.5);
         border-radius: 3px;
+    }
+    .resistration-wrapper {
+        margin-bottom: 50px;
     }
     .resistration-wrapper > h2 {
         color: #cc2931;
@@ -635,11 +656,15 @@
     .form-table tbody tr:nth-child(n + 2) {
         border-top: 3px dotted #e4daab;
     }
+
+    .submit-wrapper {
+        display: flex;
+        padding: 0 60px;
+        width: 83%;
+        justify-content: flex-end;
+    }
     .action-wrapper {
-        height: 92px;
-        width: 77%;
-        margin: 0 auto;
-        margin-bottom: 80px;
+        margin-bottom: 40px;
     }
 
     input.action {
@@ -652,7 +677,18 @@
         font-size: 14px;
         text-align: center;
         cursor: pointer;
-        margin-left: auto;
+    }
+    div.easy-login input.action {
+        display: block;
+        width: 120px;
+        height: 50px;
+        background: #cc2931;
+        color: #f5f5ff;
+        border-radius: 3px;
+        font-size: 12px;
+        text-align: center;
+        cursor: pointer;
+        margin-left: 20px;
     }
 }
 /* end resistraiton css */
