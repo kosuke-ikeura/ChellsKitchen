@@ -19,6 +19,9 @@
                     <p class="price-all">合計: <%= @flavors.all.sum(:purchase_price) %>円</p>
                     <%= link_to "レシート一覧", image_user_path(current_user), class: "images_link"%>
                 </div>
+                <div class="empty">
+                    <%= paginate(@flavors) %>
+                </div>
             </div>
         </div>
     </div>
