@@ -2,6 +2,7 @@ resource "aws_ecs_cluster" "ck-cluster" {
     name = "ck-cluster"
 }
 
+# ECS タスクの定義
 resource "aws_ecs_task_definition" "ck-task-definition" {
     family                      = "ck-task-definition"
     cpu                         = "256"
@@ -41,6 +42,8 @@ resource "aws_ecs_service" "ck-service" {
     lifecycle {
         ignore_changes = [task_definition]
     }
+
+    depends_on = [aws_lb_target_group.ck-ab-target]
 }
 
 module "nginx_sg" {
@@ -57,7 +60,7 @@ resource "aws_cloudwatch_log_group" "for_ecs" {
     retention_in_days   = 180
 }
 
-# AmazonECSTaskExecutionRolePolicyの定義(CloudWatch Logsの捜査権限をECSに与える)
+# AmazonECSTaskExecutionRolePolicyの定義(CloudWatch Logsの操作権限をECSに与える)
 data "aws_iam_policy" "ecs_task_execution_role_policy" {
     arn = "arn:aws:iam::aws:policy/serrvice-role/AmazonECSTaskExexutionRolePolicy"
 }
