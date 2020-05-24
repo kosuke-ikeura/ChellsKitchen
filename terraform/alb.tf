@@ -137,6 +137,7 @@ resource "aws_lb_listener" "https" {
     }
 }
 
+# HTTPからHTTPSにリダイレクトするリスナーの定義
 resource "aws_lb_listener" "redirect_http_to_https" {
     load_balancer_arn = aws_lb.ck-ab.arn
     port              = "8080"
@@ -155,22 +156,24 @@ resource "aws_lb_listener" "redirect_http_to_https" {
 
 # ターゲットグループの定義
 resource "aws_lb_target_group" "ck-ab-target" {
-    name                  = "ck-ab-target"
-    target_type           = "ip"
+    name                  = "ck-ab-target${substr(uuid(),0, 3)}"
     vpc_id                = aws_vpc.chells_kitchen.id
     port                  = 80
     protocol              = "HTTP"
     deregistration_delay  = 300
 
     health_check {
-        path                = "/"
-        healthy_threshold   = 5
-        unhealthy_threshold = 2
-        timeout             = 5
         interval            = 30
-        matcher             = 200
-        port                = "traffic-port"
+        path                = "/"
         protocol            = "HTTP"
+        timeout             = 5
+        healthy_threshold   = 2
+        unhealthy_threshold = 4
+        matcher             = 200
+    }
+    lifecycle {
+        create_before_destroy = true
+        ignore_changes        = [name]
     }
 
     depends_on = [aws_lb.ck-ab]

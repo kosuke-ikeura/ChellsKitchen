@@ -2,11 +2,9 @@
 
 [
     {
-        "name": "chellskitchen-nginx",
+        "name": "nginx",
         "image": "nginx:latest",
         "essential": true,
-        "cpu": 128,
-        "memoryReservation": 256,
         "logConfiguration": {
             "logDriver": "awslogs",
             "options": {
@@ -17,11 +15,9 @@
         },
         "portMappings": [
             {
-                "hostPort": 80,
                 "protocol": "tcp",
                 "containerPort": 80
             }
-        ],
-        "command": ["nginx", "-g", "daemon off;", "-c", "/etc/nginx/nginx.conf"]
+        ]
     }
 ]
