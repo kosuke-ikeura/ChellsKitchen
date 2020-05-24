@@ -117,13 +117,6 @@ resource "aws_nat_gateway" "nat_gateway_1" {
     depends_on    = [aws_internet_gateway.chells_kitchen]
 }
 
-module "chells_kitchen_sg" {
-    source          = "./security_group"
-    name            = "module_sg"
-    vpc_id          = aws_vpc.chells_kitchen.id
-    port            = 80
-    cidr_blocks     = ["0.0.0.0/0"]
-}
 
 
 
