@@ -127,13 +127,8 @@ resource "aws_lb_listener" "https" {
     ssl_policy        = "ELBSecurityPolicy-2016-08"
 
     default_action {
-        type = "fixed-response"
-
-        fixed_response {
-            content_type = "text/plain"
-            message_body = "これはHTTPSです"
-            status_code  = "200"
-        }
+        target_group_arn = aws_lb_target_group.ck-ab-target.arn
+        type             = "forward"
     }
 }
 
@@ -157,6 +152,7 @@ resource "aws_lb_listener" "redirect_http_to_https" {
 # ターゲットグループの定義
 resource "aws_lb_target_group" "ck-ab-target" {
     name                  = "ck-ab-target${substr(uuid(),0, 3)}"
+    target_type           = "ip"
     vpc_id                = aws_vpc.chells_kitchen.id
     port                  = 80
     protocol              = "HTTP"
@@ -178,6 +174,7 @@ resource "aws_lb_target_group" "ck-ab-target" {
 
     depends_on = [aws_lb.ck-ab]
 }
+
 
 resource "aws_lb_listener_rule" "ck-ab-rule" {
     listener_arn = aws_lb_listener.https.arn
