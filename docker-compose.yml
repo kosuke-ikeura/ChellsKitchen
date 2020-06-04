@@ -9,6 +9,7 @@ services:
     volumes:
       - .:/chells-kitchen
       - socket-data:/tmp/mysql.sock
+      - socket-database:/tmp/sockets/puma.sock
     depends_on:
       - db
   db:
@@ -24,9 +25,11 @@ services:
       context: containers/nginx
     volumes:
       - .:/chells-kitchen
+      - socket-database:/tmp/sockets/puma.sock
     ports:
       - 80:80
     depends_on:
       - app
 volumes:
  socket-data:
+ socket-database:
