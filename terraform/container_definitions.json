@@ -19,7 +19,13 @@
                 "containerPort": 80
             }
         ],
-        "command": ["/usr/sbin/nginx", "-g", "daemon off;", "-c", "etc/nginx/nginx.conf"]
+		"mountPoints":[
+			{
+				"sourceVolume": "sockets-database",
+				"containerPath": "/chells-kitchen/tmp/sockets"
+			}
+		],
+        "command": ["/usr/sbin/nginx", "-g", "daemon off;", "-c", "/etc/nginx/nginx.conf"]
     },
     {
         "name": "rails",
@@ -39,6 +45,12 @@
                 "containerPort": 3000
             }
         ],
+		"mountPoints": [
+			{
+				"sourceVolume": "sockets-database",
+				"containerPath": "/chells-kitchen/tmp/sockets"
+			}
+		],
         "command": ["bundle", "exec", "puma", "-C", "config/puma.rb"],
         "environment": [
             {
