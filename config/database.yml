@@ -13,9 +13,9 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch("DATABASE_USER") { 'chells-kitchen' } %> 
-  password: <%= ENV.fetch("DATABASE_PASSWORD") { 'Ko@03260326' } %>
-  host: db
+  username: <%= ENV.fetch("DATABASE_USER") { "user" } %> 
+  password: <%= ENV.fetch("DATABASE_PASSWORD") { "password" } %>
+  host: <%= ENV.fetch("DATABASE_HOST") { "db" } %>
 
 development:
   <<: *default
@@ -50,5 +50,3 @@ test:
 production:
   <<: *default
   database: chells-kitchen_production
-  username: chells-kitchen
-  password: <%= ENV['CHELLS-KITCHEN_DATABASE_PASSWORD'] %>

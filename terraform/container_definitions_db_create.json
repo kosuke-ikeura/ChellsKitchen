@@ -1,0 +1,50 @@
+[
+    {
+        "name": "app",
+        "image": "807363467264.dkr.ecr.ap-northeast-1.amazonaws.com/ck-ecr-rails",
+        "cpu": 200,
+        "memory": null,
+        "memoryReservation": 512,
+        "essential": true,
+        "command": [
+            "bundle",
+            "exec",
+            "rails",
+            "db:create"
+        ],
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "/ecs/chellskitchen-logs",
+                "awslogs-region": "ap-northeast-1",
+                "awslogs-stream-prefix": "db-create"
+            }
+        },
+        "environment": [
+            {
+                "name": "RAILS_ENV",
+                "value": "development"
+            },
+            {
+                "name": "DB_HOST",
+                "value": "ck-rds.cgykkbi9dwwv.ap-northeast-1.rds.amazonaws.com"
+            },
+            {
+                "name": "DB_USERNAME",
+                "value": "root"
+            },
+            {
+                "name": "DB_PASSWORD",
+                "value": "Ko03260326"
+            },
+            {
+                "name": "DB_DATABASE",
+                "value": "chells-kitchen"
+            },
+            {
+                "name": "RAILS_MASTER_KEY",
+                "value": "eda5852063fa921f772fdb89db1f5f5e"
+            }
+        ]
+    }
+]

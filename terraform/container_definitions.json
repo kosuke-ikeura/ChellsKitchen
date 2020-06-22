@@ -55,7 +55,7 @@
         "environment": [
             {
                 "name": "RAILS_ENV",
-                "value": "production"
+                "value": "development"
             },
             {
                 "name": "DB_HOST",
