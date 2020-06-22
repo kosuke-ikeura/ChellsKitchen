@@ -61,6 +61,15 @@ resource "aws_ecs_task_definition" "ck-task-definition" {
 		name = "sockets-database"
 	}
 }
+resource "aws_ecs_task_definition" "ck-migration" {
+	family						      = "ck-db-create"
+	container_definitions		= file("./container_definitions_db_create.json")
+	network_mode				    = "awsvpc"
+	cpu							        = "256"
+	memory						      = "512"
+	requires_compatibilities	= ["FARGATE"]
+	execution_role_arn			= module.ecs_task_execution_role.iam_role_arn
+}
 
 # CloudWatch Logsの定義
 resource "aws_cloudwatch_log_group" "for_ecs" {
