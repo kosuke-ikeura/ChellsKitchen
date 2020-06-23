@@ -28,8 +28,9 @@ resource "aws_db_instance" "ck-rds" {
   max_allocated_storage      = 100
   storage_type               = "gp2"
   storage_encrypted          = false
-  username                   = "root"
-  password                   = "Ko03260326"
+  username                   = var.aws_db_username
+  password                   = var.aws_db_password
+  # kms_key_id                 = aws_kms_key.ck-kms
   multi_az                   = true
   publicly_accessible        = false
   backup_window              = "09:10-09:40"
@@ -49,6 +50,13 @@ resource "aws_db_instance" "ck-rds" {
   }
 }
 
+# パスワードをランダムで作成する。
+# resource "random_password" "password" {
+#   length            = 16
+#   special           = true
+#   override_special  = "_%@"
+# }
+
 module "mysql_sg" {
   source = "./security_group"
   name   = "mysql_sg"
@@ -57,3 +65,6 @@ module "mysql_sg" {
   cidr_blocks = [aws_vpc.chells_kitchen.cidr_block]
   
 }
+
+variable "aws_db_username" {}
+variable "aws_db_password" {}
