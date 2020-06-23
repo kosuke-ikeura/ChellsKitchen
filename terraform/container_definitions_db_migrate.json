@@ -10,7 +10,7 @@
             "bundle",
             "exec",
             "rails",
-            "db:create"
+            "db:migrate"
         ],
         "logConfiguration": {
             "logDriver": "awslogs",

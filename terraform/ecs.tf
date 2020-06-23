@@ -47,10 +47,49 @@ module "nginx_sg" {
 #     template = file("./container_definitions.json")
 # }
 
+# railsnginxのタスクをテンプレートファイルにする
+data "template_file" "rails_nginx_container" {
+  template = file("./container_definitions_rails_nginx.json")
+
+  vars = {
+    db_database         = "${var.db_database}"
+    db_host             = "${var.db_host}"
+    db_username         = "${var.db_username}"
+    db_password         = "${var.db_password}"
+    rails_master_key    = "${var.rails_master_key}"
+  }
+
+}
+
+data "template_file" "db_create_container" {
+  template = file("./container_definitions_db_create.json")
+
+  vars = {
+    db_database         = "${var.db_database}"
+    db_host             = "${var.db_host}"
+    db_username         = "${var.db_username}"
+    db_password         = "${var.db_password}"
+    rails_master_key    = "${var.rails_master_key}"
+  }
+
+}
+
+data "template_file" "db_migrate_container" {
+  template = file("./container_definitions_db_migrate.json")
+
+  vars = {
+    db_database         = "${var.db_database}"
+    db_host             = "${var.db_host}"
+    db_username         = "${var.db_username}"
+    db_password         = "${var.db_password}"
+    rails_master_key    = "${var.rails_master_key}"
+  }
+
+}
 # ECS タスクの定義
 resource "aws_ecs_task_definition" "ck-task-definition" {
     family                      = "ck-task-definition"
-    container_definitions       = file("./container_definitions.json")
+    container_definitions       = data.template_file.rails_nginx_container.rendered
     network_mode                = "awsvpc"
     cpu                         = "256"
     memory                      = "512"
@@ -63,13 +102,23 @@ resource "aws_ecs_task_definition" "ck-task-definition" {
 }
 resource "aws_ecs_task_definition" "ck-migration" {
 	family						      = "ck-db-create"
-	container_definitions		= file("./container_definitions_db_create.json")
+	container_definitions		= data.template_file.db_create_container.rendered
 	network_mode				    = "awsvpc"
 	cpu							        = "256"
 	memory						      = "512"
 	requires_compatibilities	= ["FARGATE"]
 	execution_role_arn			= module.ecs_task_execution_role.iam_role_arn
 }
+resource "aws_ecs_task_definition" "ck-db-migration" {
+	family						      = "ck-db-migrate"
+	container_definitions		= data.template_file.db_migrate_container.rendered
+	network_mode				    = "awsvpc"
+	cpu							        = "256"
+	memory						      = "512"
+	requires_compatibilities	= ["FARGATE"]
+	execution_role_arn			= module.ecs_task_execution_role.iam_role_arn
+}
+
 
 # CloudWatch Logsの定義
 resource "aws_cloudwatch_log_group" "for_ecs" {
@@ -99,3 +148,9 @@ module "ecs_task_execution_role" {
   identifier = "ecs-tasks.amazonaws.com"
   policy     = data.aws_iam_policy_document.ecs_task_execution.json
 }
+
+variable "db_database" {}
+variable "db_host" {}
+variable "db_username" {}
+variable "db_password" {}
+variable "rails_master_key" {}
