@@ -21,3 +21,12 @@ Layout/LineLength:
 
 Style/AsciiComments:
   Enabled: false
+
+Metrics/AbcSize:
+  Max: 21
+
+Metrics/BlockLength:
+  Max: 34
+
+Metrics/MethodLength:
+  Max: 11
