@@ -86,6 +86,18 @@ data "template_file" "db_migrate_container" {
   }
 
 }
+data "template_file" "db_seed_container" {
+  template = file("./tasks/container_definitions_db_seed.json")
+
+  vars = {
+    db_database         = "${var.db_database}"
+    db_host             = "${var.db_host}"
+    db_username         = "${var.db_username}"
+    db_password         = "${var.db_password}"
+    rails_master_key    = "${var.rails_master_key}"
+  }
+
+}
 # ECS タスクの定義
 resource "aws_ecs_task_definition" "ck-task-definition" {
     family                      = "ck-task-definition"
@@ -100,7 +112,7 @@ resource "aws_ecs_task_definition" "ck-task-definition" {
 		name = "sockets-database"
 	}
 }
-resource "aws_ecs_task_definition" "ck-migration" {
+resource "aws_ecs_task_definition" "ck-db-create" {
 	family						      = "ck-db-create"
 	container_definitions		= data.template_file.db_create_container.rendered
 	network_mode				    = "awsvpc"
@@ -109,9 +121,18 @@ resource "aws_ecs_task_definition" "ck-migration" {
 	requires_compatibilities	= ["FARGATE"]
 	execution_role_arn			= module.ecs_task_execution_role.iam_role_arn
 }
-resource "aws_ecs_task_definition" "ck-db-migration" {
+resource "aws_ecs_task_definition" "ck-db-migrate" {
 	family						      = "ck-db-migrate"
 	container_definitions		= data.template_file.db_migrate_container.rendered
+	network_mode				    = "awsvpc"
+	cpu							        = "256"
+	memory						      = "512"
+	requires_compatibilities	= ["FARGATE"]
+	execution_role_arn			= module.ecs_task_execution_role.iam_role_arn
+}
+resource "aws_ecs_task_definition" "ck-db-seed" {
+	family						      = "ck-db-seed"
+	container_definitions		= data.template_file.db_seed_container.rendered
 	network_mode				    = "awsvpc"
 	cpu							        = "256"
 	memory						      = "512"
