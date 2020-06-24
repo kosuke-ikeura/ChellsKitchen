@@ -19,6 +19,8 @@ RUN bundle install
 # ホストのアプリケーションディレクトリ内をすべてコンテナにコピー
 ADD . /chells-kitchen
 
+RUN bundle exec rails assets:precompile
+
 # puma.sockを配置するディレクトリを作成
 RUN mkdir -p tmp/sockets
 
