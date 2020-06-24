@@ -12,6 +12,8 @@ services:
       - socket-database:/tmp/sockets/puma.sock
     depends_on:
       - db
+    environment:
+      RAILS_ENV: production
   db:
     build: ./environments
     image: mysql:5.7
