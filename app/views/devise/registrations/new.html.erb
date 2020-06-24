@@ -24,11 +24,15 @@
           </tr>
           </tbody>
     </table>
-    <div class="action-wrapper">
-      <%= f.submit "サインアップ", class: "action" %>
+    <div class="submit-wrapper">
+      <div class="action-wrapper">
+        <%= f.submit "サインアップ", class: "action" %>
+      </div>
+      <div class="action-wrapper">
+        <%= link_to "ログイン", new_user_session_path, class: "login-box" %>
+      </div>
     </div>
     <% end %>
     </div>
   </div>
 </div>
-<%= render "devise/shared/links" %>

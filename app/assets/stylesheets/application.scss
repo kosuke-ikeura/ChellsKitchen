@@ -13,6 +13,11 @@
  *= require_self
  */
 
+ *{
+     margin: 0;
+     padding: 0;
+ }
+
  body {
      margin: 0;
      background-color: #fcefb5;
@@ -423,17 +428,20 @@
         text-shadow: 1px 2px 3px #4d8c9b;
     }
     .section  {
-        display: flex;
-        justify-content: space-between;
         background-color: rgba(228, 218, 171, 0.5);
         margin-top: 100px;
         border-radius: 10px;
-        padding: 100px;
+        padding: 5%;
+    }
+    .top-box {
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
         align-items: center;
     }
-    .section:nth-child(even) {
-        flex-direction: row-reverse;
-    }
+    // .top-box:nth-child(even) {
+    //     flex-direction: row-reverse;
+    // }
     .number {
         width: 450px;
     }
@@ -442,10 +450,13 @@
     }
     .image img {
         width: 200px;
+        margin-left: 15%;
+
     }
     .section:nth-child(even) .image img {
         display: block;
-        margin-left: auto;
+        margin-left: 15%;
+        
     }
 
     .text-title {
@@ -559,6 +570,21 @@
         height: 92px;
         margin-bottom: 50px;
     }
+    .login-box {
+        display: block;
+        width:90px;
+        height:26px;
+        background: #cc2931;
+        color: #f5f5ff;
+        border-radius: 3px;
+        font-size: 14px;
+        text-align: center;
+        cursor: pointer;
+        padding: 12px 15px;
+        margin-left: 10%;
+        margin-top: 40px;
+    }
+    
 
     input.action {
         display: block;
@@ -666,6 +692,19 @@
     .action-wrapper {
         margin-bottom: 40px;
     }
+    .login-box {
+        display: block;
+        width:90px;
+        height:22px;
+        background: #cc2931;
+        color: #f5f5ff;
+        border-radius: 3px;
+        font-size: 14px;
+        text-align: center;
+        cursor: pointer;
+        padding: 14px 15px;
+        margin-left: 10%;
+    }
 
     input.action {
         display: block;
@@ -733,8 +772,7 @@ a.StatusImage img {
     grid-column: span 2;
 } */
 nav.pagination {
-    height: 50px;
-    margin: 0 auto;
+    height: 65px;
     display: flex;
     align-items: center;
     border: 3px dotted #e4daab;
@@ -844,7 +882,68 @@ a.purchase-button {
 
 // start mypage css
 @media screen and (max-width: 560px) {
-
+    .form-wrapper {
+        background-color: rgba(228, 218, 171, 0.5);
+        border-radius: 3px;
+    }
+    .mypage-flavors {
+        width: 70%;
+        margin: 0 auto;
+        padding: 10px 0;
+        padding-bottom: 50px;
+    }
+    .mypage-flavors .form-table td {
+        font-size: 18px;
+    }
+    .mypage-flavors tr {
+        display: flex;
+        justify-content: space-around;
+    }
+    .mypage-flavors td {
+        display: inline;
+        padding: 0;
+        padding: 20px 0;
+    }
+    .mypage-flavors th {
+        display: inline;
+        padding: 0;
+        padding: 20px 0;
+    }
+    .total-reseat {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 50px 0;
+    }
+    .total-reseat p {
+        display: inline-block;
+        margin-right: 10%;
+    }
+    .total-reseat a {
+        display: inline-block;
+        font-size: 14px;
+    }
+    .price-all {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #313186;
+        color: #ffffff;
+        border-radius: 3px;
+        height: 20px;
+        width: 100px;
+        text-align: center;
+    }
+    .images_link {
+        text-decoration: none;
+        padding: 10px 15px;
+        background-color: #cc2931;
+        color: #ffffff;
+        cursor: pointer;
+        border-radius: 3px;
+        height: 20px;
+        width: 100px;
+        text-align: center;
+    }
 }
 @media screen and (min-width: 561px) {
     .form-wrapper {
@@ -863,10 +962,16 @@ a.purchase-button {
     }
     .total-reseat {
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
         margin: 50px 0;
+    }
+    .total-reseat p {
+        display: inline-block;
+        margin-right: 10%;
+    }
+    .total-reseat a {
+        display: inline-block;
     }
     .price-all {
         display: inline-block;

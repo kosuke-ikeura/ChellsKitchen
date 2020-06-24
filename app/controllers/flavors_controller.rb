@@ -3,7 +3,7 @@
 class FlavorsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @flavors = Flavor.where(id: 2..25).order(id: 'ASC').page(params[:page]).per(10)
+    @flavors = Flavor.where(id: 1..24).order(id: 'ASC').page(params[:page]).per(9)
     @status_image = ['', 'urn_red.png', 'urn_yellow.png', 'urn_blue.png']
   end
 
