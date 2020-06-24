@@ -49,7 +49,7 @@ module "nginx_sg" {
 
 # railsnginxのタスクをテンプレートファイルにする
 data "template_file" "rails_nginx_container" {
-  template = file("./container_definitions_rails_nginx.json")
+  template = file("./tasks/container_definitions_rails_nginx.json")
 
   vars = {
     db_database         = "${var.db_database}"
@@ -62,7 +62,7 @@ data "template_file" "rails_nginx_container" {
 }
 
 data "template_file" "db_create_container" {
-  template = file("./container_definitions_db_create.json")
+  template = file("./tasks/container_definitions_db_create.json")
 
   vars = {
     db_database         = "${var.db_database}"
@@ -75,7 +75,7 @@ data "template_file" "db_create_container" {
 }
 
 data "template_file" "db_migrate_container" {
-  template = file("./container_definitions_db_migrate.json")
+  template = file("./tasks/container_definitions_db_migrate.json")
 
   vars = {
     db_database         = "${var.db_database}"
