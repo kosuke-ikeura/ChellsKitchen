@@ -2,9 +2,8 @@ version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@6.7.0
   aws-ecs: circleci/aws-ecs@1.1.0
-  aws-cli: circleci/aws-cli@0.1.16
 jobs:
-  build:
+  test:
     docker:
       - image:  circleci/ruby:2.5.1-node-browsers-legacy
         environment:
@@ -47,13 +46,14 @@ jobs:
              bundle exec rake db:create
              bundle exec rake db:schema:load
 
-      - type: shell
-        command: |
-          bundle exec rspec --profile 10 \
-                            --format RspecJunitFormatter \
-                            --out test_results/rspec.xml \
-                            --format progress \
-                            $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      - run:
+          name: Run rspec
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out test_results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
       - store_test_results:
           path: /tmp/test-results
@@ -64,3 +64,51 @@ jobs:
       - run:
           name: run rubocop
           command: bundle exec rubocop
+
+
+
+workflows:
+  rails-ecr-push:
+    jobs:
+      - test
+      - aws-ecr/build-and-push-image:
+          name: rails-build-and-push-image
+          requires:
+            - test
+          account-url: AWS_ECR_ACCOUNT_URL
+          region: AWS_REGION
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          create-repo: true
+          path: './'
+          repo: ck-ecr-rails
+          tag: "${CIRCLE_SHA1}"
+          filters:
+            branches:
+              only: master
+      - aws-ecr/build-and-push-image:
+          name: nginx-build-and-push-image
+          requires:
+            - rails-build-and-push-image
+          account-url: AWS_ECR_ACCOUNT_URL
+          region: AWS_REGION
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          create-repo: true
+          path: './containers/nginx'
+          repo: ck-ecr-nginx
+          tag: "${CIRCLE_SHA1}"
+          filters:
+            branches:
+              only: master
+      - aws-ecs/deploy-service-update:
+          name: rails-deploy-service-update
+          requires:
+            - nginx-build-and-push-image
+          family: 'ck-task-definition'
+          cluster-name: 'ck-cluster'
+          service-name: 'ck-service'
+          container-image-name-updates: 'container=chells-kitchen-container,tag=${CIRCLE_SHA1}'
+          filters:
+            branches:
+              only: master
