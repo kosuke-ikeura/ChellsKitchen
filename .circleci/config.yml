@@ -101,9 +101,9 @@ workflows:
             branches:
               only: master
       - aws-ecs/deploy-service-update:
-        name: rails-deploy-service-update
-        requires:
-          - nginx-build-and-push-image
+          name: rails-deploy-service-update
+          requires:
+            - nginx-build-and-push-image
           family: 'ck-task-definition'
           cluster-name: 'ck-cluster'
           service-name: 'ck-service'
