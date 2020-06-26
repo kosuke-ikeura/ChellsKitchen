@@ -80,11 +80,6 @@ workflows:
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           create-repo: true
-          steps:
-            - run:
-              name: setup secret_key_base
-              environment:
-                secret_key_base: SECRET_KEY_BASE
           path: './'
           repo: ck-ecr-rails
           tag: "${CIRCLE_SHA1}"
