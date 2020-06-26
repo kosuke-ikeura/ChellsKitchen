@@ -108,7 +108,18 @@ workflows:
           family: 'ck-task-definition'
           cluster-name: 'ck-cluster'
           service-name: 'ck-service'
-          container-image-name-updates: 'container=chells-kitchen-container,tag=${CIRCLE_SHA1}'
+          container-image-name-updates: 'container=rails,tag=${CIRCLE_SHA1}'
+          filters:
+            branches:
+              only: master
+      - aws-ecs/deploy-service-update:
+          name: nginx-deploy-service-update
+          requires:
+            - rails-deploy-service-update
+          family: 'ck-task-definition'
+          cluster-name: 'ck-cluster'
+          service-name: 'ck-service'
+          container-image-name-updates: 'container=nginx,tag=${CIRCLE_SHA1}'
           filters:
             branches:
               only: master
