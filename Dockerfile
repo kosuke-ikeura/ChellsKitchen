@@ -30,6 +30,9 @@ RUN bundle install
 ADD . /chells-kitchen
 
 RUN yarn install --check-files
+
+RUN export SECRET_KEY_BASE=`bundle exec rake secret`
+
 RUN RAILS_ENV=production SECRET_KEY_BASE='bin/rake secret' bin/rails assets:precompile
 
 # puma.sockを配置するディレクトリを作成
