@@ -79,7 +79,6 @@ workflows:
           region: AWS_REGION
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          SECRET_KEY_BASE: SECRET_KEY_BASE
           create-repo: true
           path: './'
           repo: ck-ecr-rails
