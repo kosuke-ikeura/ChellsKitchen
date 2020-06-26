@@ -29,4 +29,3 @@
 /.env
 
 /terraform/terraform.tfvars
-/config/secrets.yml
