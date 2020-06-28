@@ -86,7 +86,11 @@
             {
                 "name": "RAILS_MASTER_KEY",
                 "value": "${rails_master_key}"
-            }
+            },
+			{
+				"name": "SECRET_KEY_BASE",
+				"value": "${secret_key_base}"
+			}
         ]
     }
 ]

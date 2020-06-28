@@ -76,7 +76,11 @@
             {
                 "name": "RAILS_MASTER_KEY",
                 "value": "eda5852063fa921f772fdb89db1f5f5e"
-            }
+            },
+			{
+				"name": "SECRET_KEY_DASE",
+				"value": "aruhiorehakigatuita.aruhiorehakigatuita"
+			}
         ]
     }
 ]
