@@ -90,7 +90,11 @@
 			{
 				"name": "SECRET_KEY_BASE",
 				"value": "${secret_key_base}"
-			}
+            },
+            {
+                "name": "RAILS_LOG_TO_STDOUT",
+                "value": "rails_log_to_stdout"
+            }
         ]
     }
 ]

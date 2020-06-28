@@ -57,7 +57,7 @@ data "template_file" "rails_nginx_container" {
     db_username         = "${var.db_username}"
     db_password         = "${var.db_password}"
     rails_master_key    = "${var.rails_master_key}"
-	secret_key_base		= "${var.secret_key_base}"
+	  secret_key_base		= "${var.secret_key_base}"
   }
 
 }
