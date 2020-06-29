@@ -58,6 +58,7 @@ data "template_file" "rails_nginx_container" {
     db_password         = "${var.db_password}"
     rails_master_key    = "${var.rails_master_key}"
 	  secret_key_base		= "${var.secret_key_base}"
+    rails_log_to_stdout = "${var.rails_log_to_stdout}"
   }
 
 }
@@ -177,3 +178,4 @@ variable "db_username" {}
 variable "db_password" {}
 variable "rails_master_key" {}
 variable "secret_key_base" {}
+variable "rails_log_to_stdout" {}
