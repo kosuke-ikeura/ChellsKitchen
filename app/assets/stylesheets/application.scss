@@ -196,13 +196,16 @@
 }
 
 .modal-header {
+    width: 80%;
     padding: 2px 16px;
     border-bottom: none;
     height:10vh;
 }
 
 .modal-body {
-    padding: 2px 16px;
+    width: 100%;
+    // padding: 2px 16px;
+    margin: 0 auto;
 }
 
 .close {
@@ -836,7 +839,7 @@ span.translation_missing {
 .modal_explanation {
     margin-top: 30px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 button.close {
     background-color: rgba(228, 218, 171, 0.1);
